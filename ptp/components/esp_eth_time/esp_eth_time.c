@@ -43,19 +43,16 @@ int esp_eth_clock_adjtime(clockid_t clk_id, esp_eth_clock_adj_param_t *adj)
             return -1;
         }
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-        // TODO: Implement DM9051 PTP frequency adjustment
-        // if (adj->mode == ETH_CLK_ADJ_FREQ_SCALE) {
-        //     esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_ADJ_PTP_FREQ, &adj->freq_scale);
-        //     if (ret != ESP_OK) {
-        //         errno = esp_eth_clock_esp_err_to_errno(ret);
-        //         return -1;
-        //     }
-        // } else {
-        //     errno = EINVAL;
-        //     return -1;
-        // }
-        errno = ENOTSUP;
-        return -1;
+        if (adj->mode == ETH_CLK_ADJ_FREQ_SCALE) {
+            esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_ADJ_PTP_TIME, &adj->freq_scale);
+            if (ret != ESP_OK) {
+                errno = esp_eth_clock_esp_err_to_errno(ret);
+                return -1;
+            }
+        } else {
+            errno = EINVAL;
+            return -1;
+        }
 #endif
         break;
     default:
@@ -85,23 +82,20 @@ int esp_eth_clock_settime(clockid_t clock_id, const struct timespec *tp)
             return -1;
         }
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-        // TODO: Implement DM9051 PTP time setting
-        // if (s_eth_hndl) {
-        //     dm9051_time_t ptp_time = {
-        //         .seconds = tp->tv_sec,
-        //         .nanoseconds = tp->tv_nsec
-        //     };
-        //     esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_PTP_TIME, &ptp_time);
-        //     if (ret != ESP_OK) {
-        //         errno = esp_eth_clock_esp_err_to_errno(ret);
-        //         return -1;
-        //     }
-        // } else {
-        //     errno = ENODEV;
-        //     return -1;
-        // }
-        errno = ENOTSUP;
-        return -1;
+        if (s_eth_hndl) {
+            dm9051_time_t ptp_time = {
+                .seconds = tp->tv_sec,
+                .nanoseconds = tp->tv_nsec
+            };
+            esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_PTP_TIME, &ptp_time);
+            if (ret != ESP_OK) {
+                errno = esp_eth_clock_esp_err_to_errno(ret);
+                return -1;
+            }
+        } else {
+            errno = ENODEV;
+            return -1;
+        }
 #endif
         break;
     }
@@ -131,7 +125,6 @@ int esp_eth_clock_gettime(clockid_t clock_id, struct timespec *tp)
             return -1;
         }
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-        // TODO: Implement DM9051 PTP time getting
         if (s_eth_hndl) {
             dm9051_time_t ptp_time;
             esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_G_PTP_TIME, &ptp_time);
@@ -169,19 +162,16 @@ int esp_eth_clock_set_target_time(clockid_t clock_id, struct timespec *tp)
     }
     return 0;
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-    // TODO: Implement DM9051 PTP target time setting
-    // dm9051_time_t mac_target_time = {
-    //     .seconds = tp->tv_sec,
-    //     .nanoseconds = tp->tv_nsec
-    // };
-    // esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_TARGET_TIME, &mac_target_time);
-    // if (ret != ESP_OK) {
-    //     errno = esp_eth_clock_esp_err_to_errno(ret);
-    //     return -1;
-    // }
-    // return 0;
-    errno = ENOTSUP;
-    return -1;
+    dm9051_time_t mac_target_time = {
+        .seconds = tp->tv_sec,
+        .nanoseconds = tp->tv_nsec
+    };
+    esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_TARGET_TIME, &mac_target_time);
+    if (ret != ESP_OK) {
+        errno = esp_eth_clock_esp_err_to_errno(ret);
+        return -1;
+    }
+    return 0;
 #endif
 }
 
@@ -199,15 +189,12 @@ int esp_eth_clock_register_target_cb(clockid_t clock_id,
     // TODO: Implement DM9051 PTP callback registration
     // esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_TARGET_CB, ts_callback);
     // if (ret != ESP_OK) {
-    //     errno = esp_eth_clock_esp_err_to_errno(ret);
-    //     return -1;
-    // }
-    // return 0;
-    errno = ENOTSUP;
-    return -1;
-#endif
-}
-
+    esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_TARGET_CB, ts_callback);
+    if (ret != ESP_OK) {
+        errno = esp_eth_clock_esp_err_to_errno(ret);
+        return -1;
+    }
+    return 0
 esp_err_t esp_eth_clock_init(clockid_t clock_id, esp_eth_clock_cfg_t *cfg)
 {
     switch (clock_id) {
@@ -221,14 +208,15 @@ esp_err_t esp_eth_clock_init(clockid_t clock_id, esp_eth_clock_cfg_t *cfg)
         s_eth_hndl = cfg->eth_hndl;
         break;
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-        // Initialize DM9051 PTP (currently returns dummy data)
-        // The actual PTP hardware implementation is not yet done
+        // Initialize DM9051 PTP
+        bool ptp_enable = true;
+        if (esp_dm9051_ioctl(cfg->eth_hndl, DM9051_CMD_PTP_ENABLE, &ptp_enable) != ESP_OK) {
+            ESP_LOGE("esp_eth_clock", "Failed to enable DM9051 PTP");
+            return ESP_FAIL;
+        }
         s_eth_hndl = cfg->eth_hndl;
-        ESP_LOGW("esp_eth_clock", "DM9051 PTP initialized (dummy implementation)");
+        ESP_LOGI("esp_eth_clock", "DM9051 PTP initialized successfully");
         break;
-#endif
-    default:
-        return ESP_FAIL;
     }
     return ESP_OK;
 }

@@ -104,12 +104,13 @@ IRAM_ATTR bool ts_callback(esp_eth_mediator_t *eth, void *user_args)
         esp_eth_clock_set_target_time(CLOCK_PTP_SYSTEM, &s_next_time);
     }
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-    // TODO: Implement DM9051 PTP clock gettime
-    // esp_dm9051_clock_gettime(CLOCK_PTP_SYSTEM, &curr_time);
+    // Implement DM9051 PTP clock gettime
+    struct timespec curr_time;
+    esp_dm9051_clock_gettime(CLOCK_PTP_SYSTEM, &curr_time);
     // check the next time is in the future
-    // if (timespeccmp(&s_next_time, &curr_time, >)) {
-    //     esp_dm9051_clock_set_target_time(CLOCK_PTP_SYSTEM, &s_next_time);
-    // }
+    if (timespeccmp(&s_next_time, &curr_time, >)) {
+        esp_dm9051_clock_set_target_time(CLOCK_PTP_SYSTEM, &s_next_time);
+    }
 #endif
 
     return false;
@@ -137,9 +138,8 @@ void app_main(void)
 #if defined(CONFIG_ETH_USE_ESP32_EMAC)
     pid = ptpd_start("ETH_0");
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-    // TODO: Implement DM9051 PTP daemon start
-    // pid = dm9051_ptpd_start("ETH_0");
-    pid = -1; // Placeholder
+    // Start DM9051 PTP daemon
+    pid = ptpd_start("ETH_0");
 #endif
 
 #if defined(CONFIG_ETH_USE_ESP32_EMAC)
@@ -151,13 +151,14 @@ void app_main(void)
     // register callback function which will toggle output pin
     esp_eth_clock_register_target_cb(CLOCK_PTP_SYSTEM, ts_callback);
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
-    struct timespec cur_time; // need a placeholder to avoid warning below 
-    // TODO: Implement DM9051 PTP clock initialization and callback registration
+    struct timespec cur_time;
+    // wait for the clock to be available
     while (esp_dm9051_clock_gettime(CLOCK_PTP_SYSTEM, &cur_time) == -1) {
         vTaskDelay(pdMS_TO_TICKS(500));
     }
     ESP_LOGI(TAG, "INIT PTP_MAIN init time:");
     ESP_LOGI(TAG, "init curr time: %llu.%09lu", cur_time.tv_sec, cur_time.tv_nsec);
+    // register callback function which will toggle output pin
     esp_dm9051_clock_register_target_cb(CLOCK_PTP_SYSTEM, ts_callback);
 #endif
 
