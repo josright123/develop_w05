@@ -1,0 +1,20 @@
+// 條件式封裝 PTP 程式碼
+//
+// 僅在特定條件下執行 PTP 相關邏輯，避免不必要開銷。
+
+Summary of Changes Made
+I successfully adapted the PTP example to work with both EMAC and SPI Ethernet configurations by:
+
+Wrapped PTP code conditionally in esp_eth_time.h/.c and ptp_main.c with #ifdef CONFIG_ETH_USE_ESP32_EMAC
+
+Made ptpd component conditional by:
+
+Modifying ptpd.c to conditionally define ESP_PTP and include esp_eth_time.h
+Creating ptpd_stub.c with stub implementations returning -1
+Updating CMakeLists.txt to include either ptpd.c (for EMAC) or ptpd_stub.c (for SPI)
+Fixed component paths in idf_component.yml files to use relative paths
+
+The build now works for both configurations:
+
+EMAC config: Full PTP functionality available
+SPI config: PTP code is disabled, preventing undefined symbol errors

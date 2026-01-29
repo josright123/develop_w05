@@ -1,0 +1,280 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021       
+rst:0x1 (POWERON),boot:0x28 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24 
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+I (24) boot: ESP-IDF v5.5.2-19-g7de60240c 2nd stage bootloader
+I (25) boot: compile time Jan 22 2026 13:38:52
+I (25) boot: Multicore bootloader
+I (26) boot: chip revision: v0.2
+I (29) boot: efuse block revision: v1.3    
+I (33) boot.esp32s3: Boot SPI Speed : 80MHz
+I (36) boot.esp32s3: SPI Mode       : DIO
+I (40) boot.esp32s3: SPI Flash Size : 2MB
+I (44) boot: Enabling RNG early entropy source...
+I (48) boot: Partition Table:
+I (51) boot: ## Label            Usage          Type ST Offset   Length
+I (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (70) boot:  2 factory          factory app      00 00 00010000 00100000
+I (77) boot: End of partition table
+I (80) esp_image: segment 0: paddr=00010020 vaddr=3c040020 size=15c60h ( 89184) map
+I (103) esp_image: segment 1: paddr=00025c88 vaddr=3fc95500 size=02cech ( 11500) load
+I (106) esp_image: segment 2: paddr=0002897c vaddr=40374000 size=0769ch ( 30364) load
+I (114) esp_image: segment 3: paddr=00030020 vaddr=42000020 size=36178h (221560) map
+I (154) esp_image: segment 4: paddr=000661a0 vaddr=4037b69c size=09d74h ( 40308) load
+I (163) esp_image: segment 5: paddr=0006ff1c vaddr=50000000 size=00020h (    32) load
+
+
+
+I (170) boot: Loaded app from partition at offset 0x10000
+I (170) boot: Disabling RNG early entropy source...
+I (181) cpu_start: Multicore app
+D (181) cpu_start: Pro cpu up
+D (181) cpu_start: Starting app cpu, entry point is 0x40375384
+--- 0x40375384: call_start_cpu1 at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/port/cpu_start.c:204
+D (0) cpu_start: App cpu up
+D (189) clk: RTC_SLOW_CLK calibration value: 3488077
+I (199) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+D (200) cpu_start: calling init function: 0x42002d50 on core: 0
+--- 0x42002d50: __esp_system_init_fn_init_efuse_check at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/efuse/src/esp_efuse_startup.c:37
+D (200) cpu_start: calling init function: 0x420031a8 on core: 0
+--- 0x420031a8: __esp_system_init_fn_init_show_cpu_freq at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/startup_funcs.c:64
+I (205) cpu_start: Pro cpu start user code
+I (209) cpu_start: cpu freq: 160000000 Hz
+D (213) cpu_start: calling init function: 0x42002c80 on core: 0
+--- 0x42002c80: __esp_system_init_fn_init_show_app_info at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_app_format/esp_app_desc.c:123
+I (218) app_init: Application information:
+I (222) app_init: Project name:     ethernet_ptp
+I (227) app_init: App version:      v5.5.2-19-g7de60240c
+I (232) app_init: Compile time:     Jan 22 2026 13:43:58
+I (237) app_init: ELF file SHA256:  2c04093b2...
+I (241) app_init: ESP-IDF:          v5.5.2-19-g7de60240c
+D (246) cpu_start: calling init function: 0x42002d64 on core: 0
+--- 0x42002d64: __esp_system_init_fn_init_efuse_show_app_info at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/efuse/src/esp_efuse_startup.c:47
+I (252) efuse_init: Min chip rev:     v0.0
+I (255) efuse_init: Max chip rev:     v0.99 
+I (259) efuse_init: Chip rev:         v0.2
+D (263) cpu_start: calling init function: 0x42004c00 on core: 0
+--- 0x42004c00: __esp_system_init_fn_init_heap at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/heap/heap_caps_init.c:26
+D (269) memory_layout: Checking 6 reserved memory ranges:
+D (274) memory_layout: Reserved memory range 0x3fc84000 - 0x3fc95500
+D (280) memory_layout: Reserved memory range 0x3fc95500 - 0x3fc995a0
+D (286) memory_layout: Reserved memory range 0x3fceee34 - 0x3fcf0000
+D (292) memory_layout: Reserved memory range 0x40374000 - 0x40385500
+--- 0x40374000: _WindowOverflow4 at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/xtensa/xtensa_vectors.S:2027
+D (298) memory_layout: Reserved memory range 0x600fe000 - 0x600fe000
+D (304) memory_layout: Reserved memory range 0x600fffe8 - 0x60100000
+D (310) memory_layout: Building list of available memory regions:
+D (316) memory_layout: Available memory region 0x3fc995a0 - 0x3fca0000
+D (323) memory_layout: Available memory region 0x3fca0000 - 0x3fcb0000
+D (329) memory_layout: Available memory region 0x3fcb0000 - 0x3fcc0000
+D (335) memory_layout: Available memory region 0x3fcc0000 - 0x3fcd0000
+D (341) memory_layout: Available memory region 0x3fcd0000 - 0x3fce0000
+D (348) memory_layout: Available memory region 0x3fce0000 - 0x3fce9710
+D (354) memory_layout: Available memory region 0x3fce9710 - 0x3fceee34
+D (360) memory_layout: Available memory region 0x3fcf0000 - 0x3fcf8000
+D (366) memory_layout: Available memory region 0x600fe000 - 0x600fffe8
+I (373) heap_init: Initializing. RAM available for dynamic allocation:
+D (379) heap_init: New heap initialised at 0x3fc995a0
+I (384) heap_init: At 3FC995A0 len 00050170 (320 KiB): RAM
+I (389) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+D (394) heap_init: New heap initialised at 0x3fcf0000
+I (399) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+D (404) heap_init: New heap initialised at 0x600fe000
+I (409) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+D (414) cpu_start: calling init function: 0x42007fa4 on core: 0
+--- 0x42007fa4: __esp_system_init_fn_esp_timer_init_nonos at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_timer/src/esp_timer_init.c:28
+D (420) cpu_start: calling init function: 0x42007a28 on core: 0
+--- 0x42007a28: __esp_system_init_fn_init_libc at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/newlib/src/init.c:12
+D (425) cpu_start: calling init function: 0x420031f4 on core: 0
+--- 0x420031f4: __esp_system_init_fn_init_brownout at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/startup_funcs.c:79
+D (431) intr_alloc: Connected src 39 to int 1 (cpu 0)
+D (436) cpu_start: calling init function: 0x42003204 on core: 0
+--- 0x42003204: __esp_system_init_fn_init_newlib_time at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/startup_funcs.c:104
+D (441) cpu_start: calling init function: 0x42008f90 on core: 0
+--- 0x42008f90: __esp_system_init_fn_init_vfs_uart at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_driver_uart/src/uart_vfs.c:1148
+D (447) cpu_start: calling init function: 0x4200a05c on core: 0
+--- 0x4200a05c: __esp_system_init_fn_init_vfs_usj_sec at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_driver_usb_serial_jtag/src/usb_serial_jtag_vfs.c:669
+D (453) cpu_start: calling init function: 0x4200b5b8 on core: 0
+--- 0x4200b5b8: __esp_system_init_fn_init_vfs_nullfs at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/vfs/nullfs.c:322
+D (458) cpu_start: calling init function: 0x4200a2c8 on core: 0
+--- 0x4200a2c8: __esp_system_init_fn_init_vfs_console at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_vfs_console/vfs_console.c:271
+D (464) cpu_start: calling init function: 0x42007a34 on core: 0
+--- 0x42007a34: __esp_system_init_fn_init_libc_stdio at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/newlib/src/init.c:18
+D (470) cpu_start: calling init function: 0x42003210 on core: 0
+--- 0x42003210: __esp_system_init_fn_init_flash at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/startup_funcs.c:111
+D (475) spi_flash: trying chip: issi
+D (478) spi_flash: trying chip: gd
+D (482) spi_flash: trying chip: mxic
+D (485) spi_flash: trying chip: winbond
+D (488) spi_flash: trying chip: boya
+D (492) spi_flash: trying chip: th
+D (495) spi_flash: trying chip: mxic (opi)
+D (499) spi_flash: trying chip: generic
+I (502) spi_flash: detected chip: generic
+I (506) spi_flash: flash io: dio
+W (509) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+D (521) cpu_start: calling init function: 0x42002e00 on core: 0
+--- 0x42002e00: __esp_system_init_fn_init_efuse at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/efuse/src/esp_efuse_startup.c:158
+D (527) cpu_start: calling init function: 0x4202b9e8
+--- 0x4202b9e8: _GLOBAL__sub_I__ZN17__eh_globals_init7_S_initE at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/gcc/libstdc++-v3/libsupc++/eh_globals.cc:162
+D (532) cpu_start: calling init function: 0x4037a83c
+--- 0x4037a83c: enable_timer_group0_for_calibration at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_hw_support/port/esp32s3/rtc_time.c:201
+D (536) cpu_start: calling init function: 0x42004404
+--- 0x42004404: esp_ipc_init at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/esp_ipc.c:107
+D (541) cpu_start: calling init function: 0x42018604 on core: 0
+--- 0x42018604: __esp_system_init_fn_esp_timer_init_os at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_timer/src/esp_timer.c:566
+D (547) intr_alloc: Connected src 59 to int 2 (cpu 0)
+D (551) cpu_start: calling init function: 0x4203139c on core: 0
+--- 0x4203139c: __esp_system_init_fn_esp_security_init at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_security/src/init.c:57
+D (557) cpu_start: calling init function: 0x4200596c on core: 0
+--- 0x4200596c: __esp_system_init_fn_esp_sleep_startup_init at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_hw_support/sleep_gpio.c:225
+I (563) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (569) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+D (575) cpu_start: calling init function: 0x42003244 on core: 0
+--- 0x42003244: __esp_system_init_fn_init_apb_dma at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/startup_funcs.c:153
+D (581) cpu_start: calling init function: 0x42009948 on core: 0
+--- 0x42009948: __esp_system_init_fn_usb_serial_jtag_conn_status_init at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_driver_usb_serial_jtag/src/usb_serial_jtag_connection_monitor.c:75
+D (587) cpu_start: calling init function: 0x42003250 on core: 0
+--- 0x42003250: __esp_system_init_fn_init_disable_rtc_wdt at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_system/startup_funcs.c:182
+D (592) intr_alloc: Connected src 79 to int 3 (cpu 0)
+D (597) app_start: Starting scheduler on CPU0
+D (601) intr_alloc: Connected src 57 to int 5 (cpu 0)
+D (601) intr_alloc: Connected src 80 to int 0 (cpu 1)
+D (601) app_start: Starting scheduler on CPU1
+D (611) intr_alloc: Connected src 58 to int 1 (cpu 1)
+I (601) main_task: Started on CPU0
+D (621) heap_init: New heap initialised at 0x3fce9710
+D (621) intr_alloc: Connected src 52 to int 8 (cpu 0)
+I (631) main_task: Calling app_main()
+D (631) event: running task for loop 0x3fce9a54
+D (631) event: created task for loop 0x3fce9a54
+D (641) event: created event loop 0x3fce9a54
+D (641) intr_alloc: Connected src 16 to int 9 (cpu 0)
+D (651) gdma: new group (0) at 0x3fceac10
+D (651) gdma: new pair (0,0) at 0x3fceac9c
+D (651) gdma: new tx channel (0,0) at 0x3fceabd8
+D (661) gdma: new rx channel (0,0) at 0x3fceacbc
+D (661) spi: SPI2 use gpio matrix.
+D (671) efuse: BLK1 REG1 [8-15], len=8 bits
+D (671) efuse: BLK1 REG1 [0-7], len=8 bits
+D (671) efuse: BLK1 REG0 [24-31], len=8 bits
+D (681) efuse: BLK1 REG0 [16-23], len=8 bits
+D (681) efuse: BLK1 REG0 [8-15], len=8 bits
+D (691) efuse: BLK1 REG0 [0-7], len=8 bits
+D (691) dm9051.mac: Using default SPI Driver
+D (691) intr_alloc: Connected src 21 to int 12 (cpu 0)
+D (701) spi_hal: eff: 20000, limit: 80000k(/0), 0 dummy, -1 delay
+D (701) spi_master: SPI2: New device added to CS0, effective clock: 20000000 Hz
+D (741) esp_eth: new ethernet driver @0x3fcecc84
+D (741) esp_netif_lwip: LwIP stack has been initialized
+D (741) esp_netif_lwip: esp-netif has been successfully initialized
+D (741) vfs_l2tap: vfs is to be registered with default settings
+D (751) esp_netif_lwip: check: remote, if=0x3fc9cf90 fn=0x42010a3c
+--- 0x42010a3c: esp_netif_new_api at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c:769
+D (751) esp_netif_objects: esp_netif_add_to_list_unsafe netif added successfully (total netifs: 1)
+D (761) esp_netif_lwip: call api in lwip: ret=0x0, give sem
+
+
+I (771) esp_eth.netif.netif_glue: 12:51:db:80:e1:e8
+D (771) esp_netif_lwip: check: remote, if=0x3fcedffc fn=0x420101e0
+--- 0x420101e0: esp_netif_set_mac_api at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c:1086
+D (781) esp_netif_lwip: call api in lwip: ret=0x0, give sem
+I (781) esp_eth.netif.netif_glue: ethernet attached to netif
+D (2591) event: running post ETH_EVENT:0 with handler 0x42014328 and context 0x3fcee228 on loop 0x3fce9a54
+--- 0x42014328: eth_action_start at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_eth/src/esp_eth_netif_glue.c:91
+D (2591) esp_eth.netif.netif_glue: eth_action_start: 0x3fcee1d0, 0x3c04965c, 0, 0x3fcecf14, 0x3fcecc84
+D (2591) esp_netif_handlers: esp_netif action has started with netif0x3fcedffc from event_id=0
+D (2601) esp_netif_lwip: check: remote, if=0x3fcedffc fn=0x42010c60
+--- 0x42010c60: esp_netif_start_api at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c:1161
+D (2611) esp_netif_lwip: esp_netif_start_api 0x3fcedffc
+D (2611) dm9051.mac: working in 100Mbps
+D (2611) esp_netif_lwip: esp_netif_get_hostname esp_netif:0x3fcedffc
+D (2621) esp_netif_lwip: call api in lwip: ret=0x0, give sem
+D (2631) dm9051.mac: working in full duplex
+D (2631) dm9051.mac: Flow control not enabled for the link
+D (2641) event: running post ETH_EVENT:2 with handler 0x42014290 and context 0x3fcee288 on loop 0x3fce9a54
+--- 0x42014290: eth_action_connected at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_eth/src/esp_eth_netif_glue.c:111
+D (2651) esp_eth.netif.netif_glue: eth_action_connected: 0x3fcee1d0, 0x3c04965c, 2, 0x3fcecf14, 0x3fcecc84
+D (2661) esp_netif_handlers: esp_netif action connected with netif0x3fcedffc from event_id=2
+D (2661) esp_netif_lwip: check: remote, if=0x3fcedffc fn=0x42010e84
+--- 0x42010e84: esp_netif_up_api at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c:1808
+D (2671) esp_netif_lwip: esp_netif_up_api esp_netif:0x3fcedffc
+
+
+I (2671) ptp_example: PTP is not supported on SPI Ethernet. Only basic Ethernet functionality is available.
+D (2671) esp_netif_lwip: call api in lwip: ret=0x0, give sem
+D (2691) esp_netif_lwip: check: remote, if=0x3fcedffc fn=0x42010698
+--- 0x42010698: esp_netif_dhcpc_start_api at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c:1600
+D (2701) esp_netif_lwip: esp_netif_dhcpc_start_api esp_netif:0x3fcedffc
+D (2701) esp_netif_lwip: esp_netif_start_ip_lost_timer esp_netif:0x3fcedffc
+D (2711) esp_netif_lwip: if0x3fcedffc start ip lost tmr: interval=120
+D (2711) esp_netif_lwip: starting dhcp client
+D (2721) esp_netif_lwip: call api in lwip: ret=0x0, give sem
+D (2731) dm9051.mac: receive len=60
+D (3731) dm9051.mac: receive len=590
+D (3751) dm9051.mac: receive len=60
+D (4751) dm9051.mac: receive len=590
+D (4771) dm9051.mac: receive len=590
+D (4781) dm9051.mac: receive len=590
+D (5771) esp_netif_lwip: esp_netif_internal_dhcpc_cb lwip-netif:0x3fcee08c
+D (5771) esp_netif_lwip: check: local, if=0x3fcedffc fn=0x420112a8
+--- 0x420112a8: esp_netif_update_default_netif_lwip at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c:313
+D (5771) esp_netif_lwip: esp_netif_update_default_netif_lwip 0x3fcedffc
+D (5771) esp_netif_lwip: if0x3fcedffc ip changed=1
+D (5781) event: running post IP_EVENT:4 with handler 0x42014218 and context 0x3fcee2fc on loop 0x3fce9a54
+--- 0x42014218: eth_action_got_ip at C:/Users/joseph/esp-idf/v5.5.2/esp-idf/components/esp_eth/src/esp_eth_netif_glue.c:134
+D (5791) esp_eth.netif.netif_glue: eth_action_got_ip: 0x3fcee1d0, 0x3c048f34, 4, 0x3fcee448, 0x3fcedffc
+D (5801) esp_netif_handlers: esp_netif action got_ip with netif0x3fcedffc from event_id=4
+I (5801) esp_netif_handlers: eth0 ip: 192.168.6.11, mask: 255.255.255.0, gw: 192.168.6.1
+D (13031) dm9051.mac: receive len=74
+D (13031) dm9051.mac: receive len=60
+D (14041) dm9051.mac: receive len=74
+D (15061) dm9051.mac: receive len=74
+D (16081) dm9051.mac: receive len=74
+D (17981) dm9051.mac: receive len=60
+D (23481) dm9051.mac: receive len=243
+D (49971) dm9051.mac: receive len=60
+D (52851) dm9051.mac: receive len=60
+D (53481) dm9051.mac: receive len=60
+D (54481) dm9051.mac: receive len=60
+D (56851) dm9051.mac: receive len=60
+D (57481) dm9051.mac: receive len=60
+D (58481) dm9051.mac: receive len=60
+D (63421) dm9051.mac: receive len=92
+D (64181) dm9051.mac: receive len=92
+D (64861) dm9051.mac: receive len=60
+D (64941) dm9051.mac: receive len=92
+D (65481) dm9051.mac: receive len=60
+D (66471) dm9051.mac: receive len=60
+D (70881) dm9051.mac: receive len=60
+D (71481) dm9051.mac: receive len=60
+D (72481) dm9051.mac: receive len=60
+D (73891) dm9051.mac: receive len=60
+D (74481) dm9051.mac: receive len=60
+D (75471) dm9051.mac: receive len=60
+D (77901) dm9051.mac: receive len=60
+D (78481) dm9051.mac: receive len=60
+D (79471) dm9051.mac: receive len=60
+D (85901) dm9051.mac: receive len=60
+D (86471) dm9051.mac: receive len=60
+D (87471) dm9051.mac: receive len=60
+D (91911) dm9051.mac: receive len=60
+D (92481) dm9051.mac: receive len=60
+D (93471) dm9051.mac: receive len=60
+D (94921) dm9051.mac: receive len=60
+D (95471) dm9051.mac: receive len=60
+D (96481) dm9051.mac: receive len=60
+D (98931) dm9051.mac: receive len=60
+D (99471) dm9051.mac: receive len=60
+D (100471) dm9051.mac: receive len=60
+D (106941) dm9051.mac: receive len=60
+D (107481) dm9051.mac: receive len=60
+D (108481) dm9051.mac: receive len=60
+D (122711) esp_netif_lwip: esp_netif_ip_lost_timer esp_netif:0x3fcedffc
+D (122711) esp_netif_lwip: if0x3fcedffc ip lost tmr: no need raise ip lost event
