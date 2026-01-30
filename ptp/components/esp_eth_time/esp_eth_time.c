@@ -189,12 +189,19 @@ int esp_eth_clock_register_target_cb(clockid_t clock_id,
     // TODO: Implement DM9051 PTP callback registration
     // esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_TARGET_CB, ts_callback);
     // if (ret != ESP_OK) {
+    //     errno = esp_eth_clock_esp_err_to_errno(ret);
+    //     return -1;
+    // }
+    // return 0;
     esp_err_t ret = esp_dm9051_ioctl(s_eth_hndl, DM9051_CMD_S_TARGET_CB, ts_callback);
     if (ret != ESP_OK) {
         errno = esp_eth_clock_esp_err_to_errno(ret);
         return -1;
     }
-    return 0
+    return 0;
+#endif
+}
+
 esp_err_t esp_eth_clock_init(clockid_t clock_id, esp_eth_clock_cfg_t *cfg)
 {
     switch (clock_id) {
@@ -215,8 +222,12 @@ esp_err_t esp_eth_clock_init(clockid_t clock_id, esp_eth_clock_cfg_t *cfg)
             return ESP_FAIL;
         }
         s_eth_hndl = cfg->eth_hndl;
+        .......................FDSMV KFD  ...................
         ESP_LOGI("esp_eth_clock", "DM9051 PTP initialized successfully");
         break;
+#endif
+    default:
+        return ESP_FAIL;
     }
     return ESP_OK;
 }
