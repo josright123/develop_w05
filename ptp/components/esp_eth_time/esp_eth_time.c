@@ -8,8 +8,6 @@
 #include "esp_log.h"
 #include "esp_eth_time.h"
 
-...................dsfbkmn bver...
-
 #if defined(CONFIG_ETH_USE_ESP32_EMAC) || defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
 
 static esp_eth_handle_t s_eth_hndl;
@@ -219,13 +217,14 @@ esp_err_t esp_eth_clock_init(clockid_t clock_id, esp_eth_clock_cfg_t *cfg)
 #elif defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
         // Initialize DM9051 PTP
         bool ptp_enable = true;
+		ESP_LOGI("esp_eth_time.c", "DM9051 ioctl use DM9051_CMD_PTP_ENABLE 0x%04x", DM9051_CMD_PTP_ENABLE);
         if (esp_dm9051_ioctl(cfg->eth_hndl, DM9051_CMD_PTP_ENABLE, &ptp_enable) != ESP_OK) {
             ESP_LOGE("esp_eth_clock", "Failed to enable DM9051 PTP");
             return ESP_FAIL;
         }
         s_eth_hndl = cfg->eth_hndl;
-        .......................FDSMV KFD  ...................
-        ESP_LOGI("esp_eth_clock", "DM9051 PTP initialized successfully");
+        //.......................FDSMV KFD  ...................
+        //ESP_LOGI("esp_eth_clock", "DM9051 PTP initialized successfully");
         break;
 #endif
     default:
