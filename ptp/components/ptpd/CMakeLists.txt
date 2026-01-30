@@ -2,7 +2,7 @@ set(ptpd_srcs "")
 if(CONFIG_ETH_USE_ESP32_EMAC)
     list(APPEND ptpd_srcs "ptpd.c")
 elseif(CONFIG_ETH_USE_ESP32_DM9051_PTP)
-    list(APPEND ptpd_srcs "ptpd_stub.c")
+    list(APPEND ptpd_srcs "ptpd.c")
 endif()
 
 idf_component_register(SRCS "${ptpd_srcs}"

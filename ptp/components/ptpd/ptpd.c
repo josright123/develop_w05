@@ -26,9 +26,7 @@
  *
  ****************************************************************************/
 
-#if defined(CONFIG_ETH_USE_ESP32_EMAC) || defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
 #define ESP_PTP 1
-#endif
 
 /****************************************************************************
  * Included Files
@@ -81,9 +79,7 @@
 #include "esp_err.h"
 #include "lwip/prot/ethernet.h" // Ethernet headers
 
-#ifdef ESP_PTP
 #include "esp_eth_time.h"
-#endif
 
 #define ETH_TYPE_PTP 0x88F7
 
@@ -2010,6 +2006,9 @@ int ptpd_start(FAR const char *interface)
 {
 #ifdef ESP_PTP
   if (s_state == NULL) {
+
+    ESP_LOGW(TAG, "ptp_daemon() PTPD is running ...");
+
     xTaskCreate(ptp_daemon, "PTPD", CONFIG_NETUTILS_PTPD_STACKSIZE,
               (void *)interface, tskIDLE_PRIORITY + 2, NULL);
     return 1;

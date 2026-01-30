@@ -129,9 +129,9 @@ void app_main(void)
         };
         if (esp_eth_clock_init(CLOCK_PTP_SYSTEM, &clock_cfg) != ESP_OK) {
             ESP_LOGE(TAG, "Failed to initialize PTP clock");
-        } else {
-            ESP_LOGI(TAG, "PTP clock initialized successfully");
-        }
+        } //else {
+        //    ESP_LOGI(TAG, "PTP clock initialized successfully");
+        //}
     }
     
     int pid;
@@ -162,10 +162,11 @@ void app_main(void)
     esp_dm9051_clock_register_target_cb(CLOCK_PTP_SYSTEM, ts_callback);
 #endif
 
-ESP_LOGI(TAG, "DEBUG: while(1)");
-while (1) {
-        vTaskDelay(pdMS_TO_TICKS(500));
-}
+// ESP_LOGI(TAG, "DEBUG: while(1)");
+// while (1) {
+//         vTaskDelay(pdMS_TO_TICKS(100));
+// }
+
     // initialize output pin
     gpio_config_t gpio_out_cfg = {
         .pin_bit_mask = (1ULL << CONFIG_EXAMPLE_PTP_PULSE_GPIO),

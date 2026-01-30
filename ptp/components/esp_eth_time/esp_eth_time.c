@@ -8,6 +8,8 @@
 #include "esp_log.h"
 #include "esp_eth_time.h"
 
+...................dsfbkmn bver...
+
 #if defined(CONFIG_ETH_USE_ESP32_EMAC) || defined(CONFIG_ETH_USE_ESP32_DM9051_PTP) || defined(ASSERT_DM9_PTP)
 
 static esp_eth_handle_t s_eth_hndl;
