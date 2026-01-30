@@ -326,6 +326,10 @@ static int ptp_net_send(FAR struct ptp_state_s *state, void *ptp_msg, uint16_t p
   ts_info->len = L2TAP_IREC_LEN(sizeof(struct timespec));
   ts_info->type = L2TAP_IREC_TIME_STAMP;
 
+  /* Joseph Debug*/
+  ESP_LOGD(TAG, "ptp_net_send -- write(state->ptp_socket, &ptp_msg_ext_buff, 0)");
+
+#if 0
   int ret = write(state->ptp_socket, &ptp_msg_ext_buff, 0);
 
   // check if write was successful, ts exists and ts_info is valid
@@ -333,8 +337,9 @@ static int ptp_net_send(FAR struct ptp_state_s *state, void *ptp_msg, uint16_t p
     {
       *ts = *(struct timespec *)ts_info->data;
     }
-
   return ret;
+#endif
+  return 0;
 }
 
 static int ptp_net_recv(FAR struct ptp_state_s *state, void *ptp_msg, uint16_t ptp_msg_len, struct timespec *ts)
