@@ -1,0 +1,55 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x28 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x11a4
+load:0x403c8700,len:0xb3c
+load:0x403cb700,len:0x2dac
+entry 0x403c88b0
+I (118) app_init: Project name:     ethernet_ptp
+I (118) app_init: Compile time:     Jan 30 2026 13:24:40
+I (118) app_init: ESP-IDF:          v5.5.2-24-g3cda38af1-dirty
+W (123) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+D (134) cpu_start: calling init function: 0x4202b2e0
+--- 0x4202b2e0: _GLOBAL__sub_I__ZN17__eh_globals_init7_S_initE at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/gcc/libstdc++-v3/libsupc++/eh_globals.cc:162
+D (139) cpu_start: calling init function: 0x4037a8b4
+--- 0x4037a8b4: enable_timer_group0_for_calibration at C:/Users/joseph/esp-w05/v5.5.2/esp-idf/components/esp_hw_support/port/esp32s3/rtc_time.c:201
+D (144) cpu_start: calling init function: 0x420040c0
+--- 0x420040c0: esp_ipc_init at C:/Users/joseph/esp-w05/v5.5.2/esp-idf/components/esp_system/esp_ipc.c:107
+I (150) main_task: Started on CPU0
+I (180) main_task: Calling app_main()
+D (180) spi: SPI2 use gpio matrix.
+D (180) dm9051: Using default SPI Driver
+D (180) spi_hal: eff: 20000, limit: 80000k(/0), 0 dummy, -1 delay
+D (190) spi_master: SPI2: New device added to CS0, effective clock: 20000000 Hz
+D (190) dm9051: receive len=60 (count: 1)
+D (220) esp_eth: new ethernet driver @0x3fcecc84
+D (220) esp_netif_objects: esp_netif_add_to_list_unsafe netif added successfully (total netifs: 1)
+I (220) esp_eth.netif.netif_glue: 12:51:db:80:e1:e8
+I (220) esp_eth.netif.netif_glue: ethernet attached to netif
+D (2330) dm9051: working in 100Mbps
+D (2330) dm9051: working in full duplex
+D (2330) dm9051: Flow control not enabled for the link
+W (2330) dm9051.ptp: PTP enable not supported on DM9051
+
+D (2340) dm9051: receive len=60 (count: 1)
+I (2350) ptp_example: PTP clock initialized successfully
+W (2350) dm9051.ptp: Get PTP time not supported on DM9051
+W (2360) dm9051.ptp: Get PTP time -- Do insert implementation coce
+
+I (2360) ptp_example: INIT PTP_MAIN init time:
+I (2370) ptp_example: init curr time: 0.000000000
+W (2370) dm9051.ptp: Set target callback not supported on DM9051
+I (2380) ptp_example: DEBUG: while(1)
+
+
+
+D (3350) dm9051: receive len=590 (count: 2)
+D (3360) dm9051: receive len=60 (count: 3)
+I (5380) esp_eth.netif.netif_glue: eth_action_got_ip: 0x3fcee1d0, 0x3c048494, 4, 0x3fcee458, 0x3fcedffc
+I (5380) esp_netif_handlers: eth0 ip: 192.168.6.11, mask: 255.255.255.0, gw: 192.168.6.1
+W (5380) dm9051.ptp: Enabled logging for the first three received packets
+D (5860) dm9051: receive len=60 (count: 1)
+D (5860) dm9051: receive len=60 (count: 2)
+D (9860) dm9051: receive len=60 (count: 3)

@@ -1,0 +1,3 @@
+c:\Users\joseph\esp-w05\v5.5.2\esp-idf\components\esp_eth\src\spi\dm9051\esp_eth_mac_dm9051.c
+c:\Users\joseph\esp-w05\v5.5.2\esp-idf\developer\bk_example1\ptp\main\ptp_main.c ----------  X
+c:\Users\joseph\esp-w05\v5.5.2\esp-idf\components\esp_system\startup.c
